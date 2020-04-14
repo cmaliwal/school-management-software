@@ -6,7 +6,7 @@ keeping school documents, academic history, and other vital.
 
 ##Main Features
 
-#Student
+### Student
 
     Add Student
 
@@ -38,7 +38,7 @@ keeping school documents, academic history, and other vital.
 
     Send Feedback to HOD
 
-#Teacher
+### Teacher
 
     Add Teacher.
 
@@ -70,7 +70,7 @@ keeping school documents, academic history, and other vital.
 
     Send Feedback to HOD
 
-#Admin
+### Admin
 
     Add have Full access to Student.
 
@@ -80,7 +80,7 @@ keeping school documents, academic history, and other vital.
 
     Manage Student Behaviour Reports
 
-##Run Projects:
+### Run Projects:
 
 Step 1: 
 
