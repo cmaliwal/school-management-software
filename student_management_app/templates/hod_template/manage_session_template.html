@@ -1,0 +1,115 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Manage Session
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <a class="btn btn-primary" href="{% url 'add_session' %}" role="button">+ Add Session</a> <br/>&nbsp;
+
+            {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Session Details</h3>
+
+                            <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" id="search" value="{{ search }}" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                <div class="input-group-append">
+                                <button type="submit" id="searchsubmit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                <th>ID</th>
+                                <th>Session Start Year</th>
+                                <th>Session End Year</th>
+                                <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for session_year in session_years %}
+                                <tr>
+                                <td>{{ session_year.id }}</td>
+                                <td>{{ session_year.session_start_year }}</td>
+                                <td>{{ session_year.session_end_year }}</td>
+                                <td>
+                                    <a href="{% url 'edit_session' session_year.id %}" class="btn btn-success">Edit</a> 
+                                    <a href="{% url 'delete_session' session_year.id %}" class="btn btn-danger">Delete</a>
+                                </td>
+                                </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+                            </table>
+                            {% if session_years.has_other_pages %}
+                                <ul class="pagination">
+                                {% if session_years.has_previous %}
+                                    <li class="pagination-action"><a onclick=myFunction({{session_years.previous_page_number}})>&laquo; PRE</a></li>
+                                {% else %}
+                                    <li class="disabled"><span></span></li>
+                                {% endif %}
+                                {% for i in session_years.paginator.page_range %}
+                                    {% if users.number == i %}
+                                    <li class="pagination-number pagination-current"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                    {% else %}
+                                    <li class="pagination-number"><a onclick=myFunction({{ i }})>{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if session_years.has_next %}
+                                    <li class ="pagination-action" ><a onclick=myFunction({{session_years.next_page_number}})>NEXT &raquo;</a></li>
+                                {% else %}
+                                    <li class="disabled"><span></span></li>
+                                {% endif %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        <!-- /.card-body -->
+                        </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+  {% endblock main_content %}

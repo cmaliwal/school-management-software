@@ -1,0 +1,102 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Leave Apply by Staffs
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Leave Apply by Staffs</h3>
+                        </div>
+                        <!-- /.card-header -->
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Staff ID</th>
+                                    <th>Staff Name</th>
+                                    <th>Leave Date</th>
+                                    <th>Leave Message</th>
+                                    <th>Applied On</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+
+                                {% for leave in leaves %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ leave.id }}</td>
+                                    <td>{{ leave.staff_id.admin.id }}</td>
+                                    <td>{{ leave.staff_id.admin.first_name }} {{ feedback.staff_id.admin.last_name }}</td> 
+                                    <td>{{ leave.leave_date }}</td>
+                                    <td>{{ leave.leave_message }}</td>
+                                    <td>{{ leave.created_at }}</td>
+                                    <td>
+                                        {% if leave.leave_status == 0 %}
+                                            <a href="{% url 'staff_leave_approve' leave_id=leave.id %}" class="btn btn-success">Approve</a>
+                                            <a href="{% url 'staff_leave_reject' leave_id=leave.id %}" class="btn btn-danger">Reject</a>
+                                        {% elif leave.leave_status == 1 %}
+                                            <button class="btn btn-warning" disabled="disabled">Approved</button>
+                                        {% else %}
+                                            <button class="btn btn-danger" disabled="disabled">Rejected</button>
+                                        {% endif %}
+                                        
+                                    </td>
+                                </tr>
+                                </tbody>
+                                {% endfor %}
+
+                            </table>
+                            {% if leaves.has_other_pages %}
+                                <ul class="pagination">
+                                {% if leaves.has_previous %}
+                                    <li><a class="pagination-action" href="?page={{ leaves.previous_page_number }}">&laquo; PRE</a></li>
+                                {% else %}
+                                    <li class="disabled"><span></span></li>
+                                {% endif %}
+                                {% for i in leaves.paginator.page_range %}
+                                    {% if users.number == i %}
+                                    <li class="pagination-number pagination-current"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                    {% else %}
+                                    <li><a class="pagination-number" href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if leaves.has_next %}
+                                    <li><a class ="pagination-action" href="?page={{ leaves.next_page_number }}">NEXT &raquo;</a></li>
+                                {% else %}
+                                    <li class="disabled"><span></span></li>
+                                {% endif %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+
+
+  {% endblock main_content %}
+
+  {% comment %} Custom JS to Identify the Reply and Post Reply {% endcomment %}
+
+  {% block custom_js %}
+
+  {% endblock custom_js %}
