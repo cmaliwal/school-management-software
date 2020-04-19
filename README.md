@@ -4,7 +4,7 @@ Our world is facing a very serious challenge with the spread of the
 corona virus, but there is hope on the horizon. School management software is a tool specifically intended to streamline the paperless administration of institutes and academic organization. It comprises of a variety of modules that significantly assist teachers and staff in
 keeping school documents, academic history, and other vital.
 
-##Main Features
+## Main Features
 
 ### Student
 
@@ -80,7 +80,7 @@ keeping school documents, academic history, and other vital.
 
     Manage Student Behaviour Reports
 
-### Run Projects:
+### Run Project:
 
 Step 1: 
 
@@ -105,6 +105,14 @@ Step 4:
 run projects server: 
 
 command: python manage.py runserver
+
+# Login creds:
+(HOD login)
+
+email = admin@admin.com
+
+password = admin@12345
+
 
 
 
